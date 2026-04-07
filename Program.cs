@@ -9,6 +9,8 @@ using Telegram.Bot.Types.ReplyMarkups;
 using MongoDB.Driver;
 using Quartz;
 using Quartz.Impl;
+using System.Net;
+using System.Text;
 
 class Program
 {
@@ -65,7 +67,36 @@ class Program
 
         await StartScheduler();
 
-        await Task.Delay(Timeout.Infinite); // mantém rodando no Render
+        // 🚀 PORTA FAKE PARA O RENDER
+        StartHttpListener();
+
+        await Task.Delay(Timeout.Infinite);
+    }
+
+    // 🔥 Listener para manter Web Service vivo
+    static void StartHttpListener()
+    {
+        var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
+
+        var listener = new HttpListener();
+        listener.Prefixes.Add($"http://*:{port}/");
+        listener.Start();
+
+        Console.WriteLine($"Listening on port {port}");
+
+        _ = Task.Run(async () =>
+        {
+            while (true)
+            {
+                var context = await listener.GetContextAsync();
+                var response = context.Response;
+
+                var buffer = Encoding.UTF8.GetBytes("Bot está rodando!");
+                response.ContentLength64 = buffer.Length;
+                await response.OutputStream.WriteAsync(buffer, 0, buffer.Length);
+                response.Close();
+            }
+        });
     }
 
     static List<Promotion> LoadPromotions()
