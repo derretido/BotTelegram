@@ -1,5 +1,0 @@
-C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\obj\Debug\net10.0\BOTTELEGRAMCSharp.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\obj\Debug\net10.0\BOTTELEGRAMCSharp.AssemblyInfoInputs.cache
-C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\obj\Debug\net10.0\BOTTELEGRAMCSharp.AssemblyInfo.cs
-C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\obj\Debug\net10.0\BOTTELEGRAMCSharp.csproj.CoreCompileInputs.cache
-C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\obj\Debug\net10.0\BOTTELEGRAMCSharp.csproj.AssemblyReference.cache
