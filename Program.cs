@@ -25,9 +25,18 @@ class Program
     static async Task Main()
     {
         DotNetEnv.Env.Load();
-        string token = Environment.GetEnvironmentVariable("BOT_TOKEN")!;
-        string mongoUri = Environment.GetEnvironmentVariable("MONGO_URI")!;
-        CHAT_ID = long.Parse(Environment.GetEnvironmentVariable("CHAT_ID")!);
+
+        var token = Environment.GetEnvironmentVariable("BOT_TOKEN");
+        var mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
+        var chatIdEnv = Environment.GetEnvironmentVariable("CHAT_ID");
+
+        if (string.IsNullOrEmpty(token) || string.IsNullOrEmpty(mongoUri) || string.IsNullOrEmpty(chatIdEnv))
+        {
+            Console.WriteLine("Variáveis de ambiente não configuradas.");
+            return;
+        }
+
+        CHAT_ID = long.Parse(chatIdEnv);
 
         botClient = new TelegramBotClient(token);
 
@@ -54,18 +63,17 @@ class Program
         var me = await botClient.GetMeAsync();
         Console.WriteLine($"Bot {me.Username} iniciado...");
 
-        // Inicializando o agendador Quartz
         await StartScheduler();
 
-        Console.ReadLine();
+        await Task.Delay(Timeout.Infinite); // mantém rodando no Render
     }
 
     static List<Promotion> LoadPromotions()
     {
-        return collection.Find(Builders<Promotion>.Filter.Empty).ToList();
+        return collection?.Find(Builders<Promotion>.Filter.Empty).ToList() ?? new List<Promotion>();
     }
 
-    static string GetLink(int hora)
+    static string? GetLink(int hora)
     {
         var promo = LoadPromotions().Find(p => p.Hora == hora);
         return promo?.Url;
@@ -89,14 +97,21 @@ class Program
         else if (text.StartsWith("/promo"))
         {
             var keyboard = new List<List<InlineKeyboardButton>>();
+
             for (int hora = 9; hora <= 19; hora++)
             {
-                keyboard.Add(new List<InlineKeyboardButton> {
-                    InlineKeyboardButton.WithUrl($"Promoção {hora}h", GetLink(hora))
-                });
+                var link = GetLink(hora);
+
+                if (!string.IsNullOrEmpty(link))
+                {
+                    keyboard.Add(new List<InlineKeyboardButton> {
+                        InlineKeyboardButton.WithUrl($"Promoção {hora}h", link)
+                    });
+                }
             }
 
             var replyMarkup = new InlineKeyboardMarkup(keyboard);
+
             await bot.SendTextMessageAsync(message.Chat.Id,
                 "Escolha uma promoção:", replyMarkup: replyMarkup);
         }
@@ -123,7 +138,6 @@ class Program
         return Task.CompletedTask;
     }
 
-    // Quartz.NET para agendamento
     static async Task StartScheduler()
     {
         StdSchedulerFactory factory = new StdSchedulerFactory();
@@ -151,24 +165,21 @@ class Program
         public async Task Execute(IJobExecutionContext context)
         {
             int hora = context.JobDetail.JobDataMap.GetInt("hora");
-            string link = GetLink(hora);
+            string? link = GetLink(hora);
 
-            if (link != null)
+            if (!string.IsNullOrEmpty(link) && botClient != null)
             {
                 var keyboard = new InlineKeyboardMarkup(new[]
                 {
                     new[] { InlineKeyboardButton.WithUrl($"Promoção {hora}h", link) }
                 });
 
-                if (botClient != null)
-                {
-                    await botClient.SendTextMessageAsync(
-                        chatId: CHAT_ID,
-                        text: $"Confira a promoção das {hora}h:",
-                        replyMarkup: keyboard
-                    );
-                }
+                await botClient.SendTextMessageAsync(
+                    chatId: CHAT_ID,
+                    text: $"Confira a promoção das {hora}h:",
+                    replyMarkup: keyboard
+                );
             }
         }
     }
-}   
+}
