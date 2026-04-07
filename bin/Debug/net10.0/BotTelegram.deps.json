@@ -11,7 +11,7 @@
           "DotNetEnv": "3.1.1",
           "MongoDB.Driver": "3.7.1",
           "Quartz": "3.17.1",
-          "Telegram.Bot": "19.0.0"
+          "Telegram.Bot": "18.0.0"
         },
         "runtime": {
           "BotTelegram.dll": {}
@@ -100,11 +100,11 @@
           }
         }
       },
-      "Newtonsoft.Json/13.0.1": {
+      "Newtonsoft.Json/12.0.2": {
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {
-            "assemblyVersion": "13.0.0.0",
-            "fileVersion": "13.0.1.25517"
+            "assemblyVersion": "12.0.0.0",
+            "fileVersion": "12.0.2.23222"
           }
         }
       },
@@ -143,14 +143,14 @@
           }
         }
       },
-      "Telegram.Bot/19.0.0": {
+      "Telegram.Bot/18.0.0": {
         "dependencies": {
-          "Newtonsoft.Json": "13.0.1"
+          "Newtonsoft.Json": "12.0.2"
         },
         "runtime": {
-          "lib/net6.0/Telegram.Bot.dll": {
-            "assemblyVersion": "19.0.0.0",
-            "fileVersion": "19.0.0.0"
+          "lib/netcoreapp3.1/Telegram.Bot.dll": {
+            "assemblyVersion": "18.0.0.0",
+            "fileVersion": "18.0.0.0"
           }
         }
       },
@@ -226,12 +226,12 @@
       "path": "mongodb.driver/3.7.1",
       "hashPath": "mongodb.driver.3.7.1.nupkg.sha512"
     },
-    "Newtonsoft.Json/13.0.1": {
+    "Newtonsoft.Json/12.0.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A==",
-      "path": "newtonsoft.json/13.0.1",
-      "hashPath": "newtonsoft.json.13.0.1.nupkg.sha512"
+      "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
+      "path": "newtonsoft.json/12.0.2",
+      "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
     },
     "Quartz/3.17.1": {
       "type": "package",
@@ -261,12 +261,12 @@
       "path": "sprache/2.3.1",
       "hashPath": "sprache.2.3.1.nupkg.sha512"
     },
-    "Telegram.Bot/19.0.0": {
+    "Telegram.Bot/18.0.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Q16IOitgjGoaJOuqgKQy0FeF+hr/ncmlX2esrhCC7aiyhSX7roYEriWaGAHkQZR8QzbImjFfl4eQh2IxcnOrPg==",
-      "path": "telegram.bot/19.0.0",
-      "hashPath": "telegram.bot.19.0.0.nupkg.sha512"
+      "sha512": "sha512-BD0UchUXINymCGS+1O1tv2enCRyv+VbSJQAgfnueTZs3j7K4XXyJyW0CgyJleTrqB1oq1hS1ux6gBpi3Ajp+ZQ==",
+      "path": "telegram.bot/18.0.0",
+      "hashPath": "telegram.bot.18.0.0.nupkg.sha512"
     },
     "ZstdSharp.Port/0.7.3": {
       "type": "package",

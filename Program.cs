@@ -12,22 +12,22 @@ using Quartz.Impl;
 
 class Program
 {
-    private static TelegramBotClient botClient;
-    private static IMongoCollection<Promotion> collection;
+    private static TelegramBotClient? botClient;
+    private static IMongoCollection<Promotion>? collection;
     private static long CHAT_ID;
 
     public class Promotion
     {
         public int Hora { get; set; }
-        public string Url { get; set; }
+        public string? Url { get; set; }
     }
 
     static async Task Main()
     {
         DotNetEnv.Env.Load();
-        string token = Environment.GetEnvironmentVariable("BOT_TOKEN");
-        string mongoUri = Environment.GetEnvironmentVariable("MONGO_URI");
-        CHAT_ID = long.Parse(Environment.GetEnvironmentVariable("CHAT_ID"));
+        string token = Environment.GetEnvironmentVariable("BOT_TOKEN")!;
+        string mongoUri = Environment.GetEnvironmentVariable("MONGO_URI")!;
+        CHAT_ID = long.Parse(Environment.GetEnvironmentVariable("CHAT_ID")!);
 
         botClient = new TelegramBotClient(token);
 
@@ -160,11 +160,14 @@ class Program
                     new[] { InlineKeyboardButton.WithUrl($"Promoção {hora}h", link) }
                 });
 
-                await botClient.SendTextMessageAsync(
-                    chatId: CHAT_ID,
-                    text: $"Confira a promoção das {hora}h:",
-                    replyMarkup: keyboard
-                );
+                if (botClient != null)
+                {
+                    await botClient.SendTextMessageAsync(
+                        chatId: CHAT_ID,
+                        text: $"Confira a promoção das {hora}h:",
+                        replyMarkup: keyboard
+                    );
+                }
             }
         }
     }

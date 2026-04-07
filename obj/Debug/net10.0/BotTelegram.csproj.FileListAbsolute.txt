@@ -29,3 +29,4 @@ C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\bin\Debug\ne
 C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\bin\Debug\net10.0\Microsoft.Extensions.Configuration.Abstractions.dll
 C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\bin\Debug\net10.0\Microsoft.Extensions.Primitives.dll
 C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\bin\Debug\net10.0\Sprache.dll
+C:\Users\leona\OneDrive\Área de Trabalho\botTelegramc#\BotTelegram\obj\Debug\net10.0\BotTelegram.sourcelink.json
