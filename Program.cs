@@ -133,7 +133,7 @@ class Program
             if (text.StartsWith("/start"))
             {
                 await bot.SendTextMessageAsync(message.Chat.Id,
-                    "Olá, bem-vindo ao Achadinhos Imperdíveis! Envie /help para ver os comandos disponíveis.");
+                    "Olá, bem-vindo ao Bot do Leo! Envie /help para ver os comandos disponíveis.");
             }
             else if (text.StartsWith("/help"))
             {
