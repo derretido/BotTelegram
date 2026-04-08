@@ -67,13 +67,13 @@ class Program
 
         await StartScheduler();
 
-        // 🚀 PORTA FAKE PARA O RENDER
+        //PORTA FAKE PARA O RENDER
         StartHttpListener();
 
         await Task.Delay(Timeout.Infinite);
     }
 
-    // 🔥 Listener para manter Web Service vivo
+    //Listener para manter Web Service vivo
     static void StartHttpListener()
     {
         var port = Environment.GetEnvironmentVariable("PORT") ?? "10000";
